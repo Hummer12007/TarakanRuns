@@ -1,12 +1,20 @@
 #ifndef STADIUM_HPP
 #define STADIUM_HPP
+
+
 #include <vector>
 
-#include "Track.hpp"
-#include "ISerializable.hpp"
-class Stadium : public ISerializable<Stadium> {
-	public:
-		std::vector<Track> tracks;
+class Stadium : ISerializable<Stadium::Track> {
+    public:
+        class Track : ISerializable<Stadium::Track> {
+            public:
+                unsigned int id;
+                unsigned int lanes;
+                unsigned int team_quota;
+        };
+        
+        std::vector<Stadium::Track> tracks;
 };
-#endif //STADIUM_HPP
 
+
+#endif // STADIUM_HPP
