@@ -4,9 +4,9 @@
 
 #include <vector>
 
-class Stadium : ISerializable<Stadium::Track> {
+class Stadium : public ISerializable<Stadium> {
     public:
-        class Track : ISerializable<Stadium::Track> {
+        class Track : public ISerializable<Stadium::Track> {
             public:
                 unsigned int id;
                 unsigned int lanes;

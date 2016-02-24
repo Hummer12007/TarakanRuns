@@ -7,7 +7,7 @@
 template <typename T>
 class ISerializable {
     public:
-        virtual ~ISerializable() {}
+        virtual ~ISerializable( void ) {}
         virtual std::string serialize( T ) = 0 {};
         virtual T deserialize( std::string ) = 0 {};
 };

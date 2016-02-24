@@ -7,9 +7,9 @@
 
 #include "ISerializable.hpp"
 
-class Timetable : ISerializable<Timetable> {
+class Timetable : public ISerializable<Timetable> {
     public:
-        class Entry : ISerializable<Timetable::Entry> {
+        class Entry : public ISerializable<Timetable::Entry> {
             public:
                 unsigned int timestamp;
                 unsigned int track_id;

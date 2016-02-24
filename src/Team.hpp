@@ -7,9 +7,9 @@
 
 #include "ISerializable.hpp"
 
-class Team : ISerializable<Team> {
+class Team : public ISerializable<Team> {
     public:
-        class Tarakan : ISerializable<Team::Tarakan> {
+        class Tarakan : public ISerializable<Team::Tarakan> {
             public:
                 std::string name;
         };
