@@ -1,4 +1,4 @@
-OBJECTS=Tarakan.o Team.o Track.o Stadium.o Management.o Broker.o Timetable.o
+OBJECTS=
 CFLAGS=-std=c++11 -Wall -Wextra
 VPATH=src
 
@@ -7,6 +7,9 @@ all: main
 main: $(OBJECTS)
 
 split: str_list.o
+
+format:
+	clang-format -i /[A-Z]*
 
 clean_objects:
 	rm -f *.o

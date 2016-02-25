@@ -3,7 +3,8 @@
 
 #include <string>
 
-template <typename T> class ISerializable {
+template <typename T>
+class ISerializable {
   public:
     virtual ~ISerializable(void) {}
     virtual std::string serialize(void) = 0;
