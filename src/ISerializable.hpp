@@ -8,8 +8,8 @@ template <typename T>
 class ISerializable {
     public:
         virtual ~ISerializable( void ) {}
-        virtual std::string serialize( T ) = 0;
-        virtual T deserialize( std::string ) = 0;
+        virtual std::string serialize( void ) = 0;
+        virtual void deserialize( std::string& data ) = 0;
 };
 
 
