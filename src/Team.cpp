@@ -29,7 +29,8 @@ void Team::deserialize( std::string& data ) {
     this->tarakans.clear();
     
     for (std::string s : j["tarakans"]) {
-        Team::Tarakan t = Team::Tarakan::deserialize(s);
+        Team::Tarakan t;
+        t.deserialize(s);
         this->tarakans.push_back(t);
     }
 }

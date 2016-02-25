@@ -25,7 +25,8 @@ void Stadium::deserialize( std::string& data ) {
     
     this->tracks.clear();
     for (std::string s : j["tracks"]) {
-        Stadium::Track t = Stadium::Track::deserialize(s);
+        Stadium::Track t;
+        t.deserialize(s);
         this->tracks.push_back(t);
     }
 }

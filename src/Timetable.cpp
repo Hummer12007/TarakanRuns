@@ -25,7 +25,8 @@ void Timetable::deserialize( std::string& data ) {
     
     this->entries.clear();
     for (std::string s : j["entries"]) {
-        Timetable::Entry e = Timetable::Entry::deserialize(s);
+        Timetable::Entry e;
+        e.deserialize(s);
         this->entries.push_back(e);
     }
 }

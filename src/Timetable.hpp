@@ -11,10 +11,18 @@ class Timetable : public ISerializable<Timetable> {
     public:
         class Entry : public ISerializable<Timetable::Entry> {
             public:
+                ~Entry( void );
+                std::string serialize( void );
+                void deserialize( std::string& data );
+                
                 unsigned int timestamp;
                 unsigned int track_id;
                 std::vector<std::string> racers_names;
         };
+        
+        ~Timetable( void );
+        std::string serialize( void );
+        void deserialize( std::string& data );
         
         std::vector<Timetable::Entry> entries;
 };
