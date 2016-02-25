@@ -6,28 +6,27 @@
 
 using json = nlohmann::json;
 
-
 // Team: ISerializable methods
 
-std::string Team::serialize( void ) {
+std::string Team::serialize(void) {
     json j;
-    
+
     j["name"] = this->name;
     j["tarakans"] = json::array();
     for (Team::Tarakan t : this->tarakans) {
         j["tarakans"].push_back(t.serialize());
     }
-    
+
     return j.dump();
 }
 
-void Team::deserialize( std::string& data ) {
+void Team::deserialize(std::string &data) {
     json j = json::parse(data);
-    
+
     this->name = j["name"];
     std::vector<Team::Tarakan> tarakans();
     this->tarakans.clear();
-    
+
     for (std::string s : j["tarakans"]) {
         Team::Tarakan t;
         t.deserialize(s);
@@ -35,19 +34,18 @@ void Team::deserialize( std::string& data ) {
     }
 }
 
-
 // Team::Tarakan: ISerializable methods
 
-std::string Team::Tarakan::serialize( void ) {
+std::string Team::Tarakan::serialize(void) {
     json j;
-    
+
     j["name"] = this->name;
-    
+
     return j.dump();
 }
 
-void Team::Tarakan::deserialize( std::string& data ) {
+void Team::Tarakan::deserialize(std::string &data) {
     json j = json::parse(data);
-    
+
     this->name = j["name"];
 }
