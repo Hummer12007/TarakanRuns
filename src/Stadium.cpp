@@ -23,9 +23,9 @@ void Stadium::deserialize(std::string &data) {
     json j = json::parse(data);
 
     this->tracks.clear();
-    for (std::string s : j["tracks"]) {
+    for (json o : j["tracks"]) {
         Stadium::Track t;
-        t.deserialize(s);
+        t.deserialize(o.dump());
         this->tracks.push_back(t);
     }
 }

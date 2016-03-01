@@ -23,9 +23,9 @@ void Timetable::deserialize(std::string &data) {
     json j = json::parse(data);
 
     this->entries.clear();
-    for (std::string s : j["entries"]) {
+    for (json o : j["entries"]) {
         Timetable::Entry e;
-        e.deserialize(s);
+        e.deserialize(o.dump());
         this->entries.push_back(e);
     }
 }
