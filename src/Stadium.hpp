@@ -1,6 +1,7 @@
 #ifndef STADIUM_HPP
 #define STADIUM_HPP
 
+#include <string>
 #include <vector>
 
 #include "ISerializable.hpp"
