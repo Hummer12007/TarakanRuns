@@ -13,7 +13,7 @@ std::string Timetable::serialize(void) {
 
     j["entries"] = json::array();
     for (Timetable::Entry e : this->entries) {
-        j["entries"].push_back(e.serialize());
+        j["entries"].push_back(json::parse(e.serialize()));
     }
 
     return j.dump();

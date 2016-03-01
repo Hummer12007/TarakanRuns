@@ -14,7 +14,7 @@ std::string Team::serialize(void) {
     j["name"] = this->name;
     j["tarakans"] = json::array();
     for (Team::Tarakan t : this->tarakans) {
-        j["tarakans"].push_back(t.serialize());
+        j["tarakans"].push_back(json::parse(t.serialize()));
     }
 
     return j.dump();

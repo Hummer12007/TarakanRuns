@@ -13,7 +13,7 @@ std::string Stadium::serialize(void) {
 
     j["tracks"] = json::array();
     for (Stadium::Track t : this->tracks) {
-        j["tracks"].push_back(t.serialize());
+        j["tracks"].push_back(json::parse(t.serialize()));
     }
 
     return j.dump();
