@@ -1,7 +1,6 @@
 #include <functional>
 #include <map>
 #include <string>
-#include <unistd.h>
 #include <stdlib.h>
 
 #include "json.hpp"
