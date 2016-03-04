@@ -23,7 +23,7 @@ std::string Timetable::serialize(void) {
     return j.dump();
 }
 
-void Timetable::deserialize(std::string &data) {
+void Timetable::deserialize(std::string const &data) {
     json j = json::parse(data);
 
     this->entries.clear();
@@ -50,7 +50,7 @@ std::string Timetable::Entry::serialize(void) {
     return j.dump();
 }
 
-void Timetable::Entry::deserialize(std::string &data) {
+void Timetable::Entry::deserialize(std::string const &data) {
     json j = json::parse(data);
 
     this->timestamp = j["timestamp"];

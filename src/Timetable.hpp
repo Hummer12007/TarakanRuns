@@ -12,7 +12,7 @@ class Timetable : public ISerializable<Timetable> {
       public:
         ~Entry(void);
         std::string serialize(void);
-        void deserialize(std::string &data);
+        void deserialize(std::string const &data);
 
         unsigned int timestamp;
         unsigned int track_id;
@@ -21,7 +21,7 @@ class Timetable : public ISerializable<Timetable> {
 
     ~Timetable(void);
     std::string serialize(void);
-    void deserialize(std::string &data);
+    void deserialize(std::string const &data);
 
     std::vector<Timetable::Entry> entries;
 };

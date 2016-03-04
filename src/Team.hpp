@@ -12,14 +12,14 @@ class Team : public ISerializable<Team> {
       public:
         ~Tarakan(void);
         std::string serialize(void);
-        void deserialize(std::string &data);
+        void deserialize(std::string const &data);
 
         std::string name;
     };
 
     ~Team(void);
     std::string serialize(void);
-    void deserialize(std::string &data);
+    void deserialize(std::string const &data);
 
     std::string name;
     std::vector<Team::Tarakan> tarakans;

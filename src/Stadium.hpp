@@ -12,7 +12,7 @@ class Stadium : public ISerializable<Stadium> {
       public:
         ~Track(void);
         std::string serialize(void);
-        void deserialize(std::string &data);
+        void deserialize(std::string const &data);
 
         unsigned int id;
         unsigned int lanes;
@@ -21,7 +21,7 @@ class Stadium : public ISerializable<Stadium> {
 
     ~Stadium(void);
     std::string serialize(void);
-    void deserialize(std::string &data);
+    void deserialize(std::string const &data);
 
     std::vector<Stadium::Track> tracks;
 };

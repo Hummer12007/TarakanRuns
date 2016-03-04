@@ -23,7 +23,7 @@ std::string Stadium::serialize(void) {
     return j.dump();
 }
 
-void Stadium::deserialize(std::string &data) {
+void Stadium::deserialize(std::string const &data) {
     json j = json::parse(data);
 
     this->tracks.clear();
@@ -50,7 +50,7 @@ std::string Stadium::Track::serialize(void) {
     return j.dump();
 }
 
-void Stadium::Track::deserialize(std::string &data) {
+void Stadium::Track::deserialize(std::string const &data) {
     json j = json::parse(data);
 
     this->id = j["id"];

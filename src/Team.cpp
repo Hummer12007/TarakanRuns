@@ -24,7 +24,7 @@ std::string Team::serialize(void) {
     return j.dump();
 }
 
-void Team::deserialize(std::string &data) {
+void Team::deserialize(std::string const &data) {
     json j = json::parse(data);
 
     this->name = j["name"];
@@ -52,7 +52,7 @@ std::string Team::Tarakan::serialize(void) {
     return j.dump();
 }
 
-void Team::Tarakan::deserialize(std::string &data) {
+void Team::Tarakan::deserialize(std::string const &data) {
     json j = json::parse(data);
 
     this->name = j["name"];
