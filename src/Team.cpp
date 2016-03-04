@@ -6,6 +6,10 @@
 
 using json = nlohmann::json;
 
+// Team: destructor
+
+Team::~Team(void) {}
+
 // Team: ISerializable methods
 
 std::string Team::serialize(void) {
@@ -33,6 +37,10 @@ void Team::deserialize(std::string &data) {
         this->tarakans.push_back(t);
     }
 }
+
+// Team::Tarakan: destructor
+
+Team::Tarakan::~Tarakan(void) {}
 
 // Team::Tarakan: ISerializable methods
 

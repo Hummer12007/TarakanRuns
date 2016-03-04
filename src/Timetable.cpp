@@ -6,6 +6,10 @@
 
 using json = nlohmann::json;
 
+// Timetable: destructor
+
+Timetable::~Timetable(void) {}
+
 // Timetable: ISerializable methods
 
 std::string Timetable::serialize(void) {
@@ -29,6 +33,10 @@ void Timetable::deserialize(std::string &data) {
         this->entries.push_back(e);
     }
 }
+
+// Timetable::Entry: destructor
+
+Timetable::Entry::~Entry(void) {}
 
 // Timetable::Entry: ISerializable methods
 

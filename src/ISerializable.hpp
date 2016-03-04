@@ -12,6 +12,7 @@ class ISerializable {
 };
 
 // Even pure virtual destructor should have an implementation
-inline ISerializable::~ISerializable(void) {}
+template <typename T>
+inline ISerializable<T>::~ISerializable(void) {}
 
 #endif // ISERIALIZABLE_HPP

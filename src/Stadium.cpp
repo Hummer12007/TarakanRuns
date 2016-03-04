@@ -6,6 +6,10 @@
 
 using json = nlohmann::json;
 
+// Stadium: destructor
+
+Stadium::~Stadium(void) {}
+
 // Stadium: ISerializable methods
 
 std::string Stadium::serialize(void) {
@@ -29,6 +33,10 @@ void Stadium::deserialize(std::string &data) {
         this->tracks.push_back(t);
     }
 }
+
+// Stadium::Track: destructor
+
+Stadium::Track::~Track(void) {}
 
 // Stadium::Track: ISerializable methods
 
