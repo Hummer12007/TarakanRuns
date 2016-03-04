@@ -28,7 +28,7 @@ void Team::deserialize(std::string const &data) {
     json j = json::parse(data);
 
     this->name = j["name"];
-    std::vector<Team::Tarakan> tarakans();
+    std::vector<Team::Tarakan> tarakans;
     this->tarakans.clear();
 
     for (json o : j["tarakans"]) {
