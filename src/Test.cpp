@@ -47,12 +47,10 @@ int testTeam() {
 
     std::cout << "\tteam name : " << team.name << "\n\ttarakans : [";
 
-    std::vector<Team::Tarakan> tarakans = team.tarakans;
-    cuc = tarakans.size();
-    for (int i = 0; i < cuc; i++) {
-        if (i > 0)
-            std::cout << ", ";
-        std::cout << tarakans[i].name;
+    for (auto& tarakan : team.tarakans) {
+        if (&tarakan != &*std::prev(std::end(team.tarakans)))
+			std::cout << ", ";
+        std::cout << tarakan.name;
     }
 
     std::cout << "]\n\tEnd\n";
@@ -97,18 +95,13 @@ int testTimetable() {
 
     std::vector<Timetable::Entry> entries = tt.entries;
 
-    n = entries.size();
-
-    for (int i = 0; i < n; i++) {
-        std::cout << "\t\t{timestamp : " << entries[i].timestamp
-                  << ", track_id : " << entries[i].track_id << " [\n";
-
-        std::vector<std::string> racers = entries[i].racers_names;
-        int n_racers = racers.size();
-
-        for (int j = 0; j < n_racers; j++) {
-            std::cout << "\t\t\t" << racers[i] << "\n";
-        }
+    for (auto entry : tt.entries) {
+        std::cout << "\t\t{timestamp : " << entry.timestamp
+                  << ", track_id : " << entry.track_id << " [\n";
+		
+		for (auto racer : entry.racers_names) {
+            std::cout << "\t\t\t" << racer << std::endl;			
+		}
 
         std::cout << "\t\t] }\n";
     }
@@ -148,14 +141,10 @@ int testStadium() {
 
     std::cout << "\tStadium : [\n";
 
-    std::vector<Stadium::Track> tracks = st.tracks;
-
-    n = tracks.size();
-
-    for (int i = 0; i < n; i++) {
-        std::cout << "\t\t{id : " << tracks[i].id
-                  << ", lanes : " << tracks[i].lanes
-                  << ", team_quota : " << tracks[i].team_quota << " }\n";
+    for (auto track : st.tracks) {
+        std::cout << "\t\t{id : " << track.id
+                  << ", lanes : " << track.lanes
+                  << ", team_quota : " << track.team_quota << " }\n";
     }
 
     std::cout << "\t]";
