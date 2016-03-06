@@ -1,21 +1,20 @@
-OBJECTS=
-CFLAGS=-std=c++11 -Wall -Wextra
-VPATH=src
+OBJ=Team.o Stadium.o Timetable.o
+OBJECTS=$(OBJ:%=src/%)
+
+CPPFLAGS=-std=c++11 -Wall -Wextra
+VPATH=src:lib:test
+
 
 all: main
 
 main: $(OBJECTS)
 
-split: str_list.o
-
-format:
-	clang-format -i /[A-Z]*
-
-clean_objects:
-	rm -f *.o
-
-clean_symbols:
-	rm -f -r *.dSYM
+test: $(OBJECTS)
 
 clean: clean_objects clean_symbols
 
+clean_objects:
+	find . -type f -name '*.o' -exec rm {} +
+
+clean_symbols:
+	find . -type f -name '*.dSYM' -exec rm {} +
