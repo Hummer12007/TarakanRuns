@@ -1,13 +1,13 @@
 OBJECTS=Team.o Stadium.o Timetable.o
+CPPFLAGS=-Ilib
 CXXFLAGS=-std=c++11 -Wall -Wextra
-VPATH=src:lib:test
-
+VPATH=src
 
 all: main
 
 main: $(OBJECTS)
 
-test: $(OBJECTS)
+Test: $(OBJECTS)
 
 clean: clean_objects clean_symbols
 
