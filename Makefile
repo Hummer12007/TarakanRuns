@@ -1,5 +1,5 @@
 OBJECTS=Team.o Stadium.o Timetable.o
-CPPFLAGS=-std=c++11 -Wall -Wextra
+CXXFLAGS=-std=c++11 -Wall -Wextra
 VPATH=src:lib:test
 
 
