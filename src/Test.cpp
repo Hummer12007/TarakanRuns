@@ -47,10 +47,10 @@ int testTeam() {
 
     std::cout << "\tteam name : " << team.name << "\n\ttarakans : [";
 
-    for (auto& tarakan : team.tarakans) {
+    for (auto &tarakan : team.tarakans) {
         std::cout << tarakan.name;
         if (&tarakan != &*std::prev(std::end(team.tarakans)))
-			std::cout << ", ";
+            std::cout << ", ";
     }
 
     std::cout << "]\n\tEnd\n";
@@ -98,10 +98,10 @@ int testTimetable() {
     for (auto entry : tt.entries) {
         std::cout << "\t\t{timestamp : " << entry.timestamp
                   << ", track_id : " << entry.track_id << " [\n";
-		
-		for (auto racer : entry.racers_names) {
-            std::cout << "\t\t\t" << racer << std::endl;			
-		}
+
+        for (auto racer : entry.racers_names) {
+            std::cout << "\t\t\t" << racer << std::endl;
+        }
 
         std::cout << "\t\t] }\n";
     }
@@ -142,8 +142,7 @@ int testStadium() {
     std::cout << "\tStadium : [\n";
 
     for (auto track : st.tracks) {
-        std::cout << "\t\t{id : " << track.id
-                  << ", lanes : " << track.lanes
+        std::cout << "\t\t{id : " << track.id << ", lanes : " << track.lanes
                   << ", team_quota : " << track.team_quota << " }\n";
     }
 
