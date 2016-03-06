@@ -1,6 +1,4 @@
-OBJ=Team.o Stadium.o Timetable.o
-OBJECTS=$(OBJ:%=src/%)
-
+OBJECTS=Team.o Stadium.o Timetable.o
 CPPFLAGS=-std=c++11 -Wall -Wextra
 VPATH=src:lib:test
 
