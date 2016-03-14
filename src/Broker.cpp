@@ -12,8 +12,10 @@ Broker::Broker(IMessageable &master) {
 
 std::string Broker::process_message(std::string &message) {
     // TODO: HREN
-    message.empty();    // Just do something
-    return "HREN";      // Without these lines compiler complains
+    message.empty();    // Just do something: without these lines compiler
+    return "HREN";      // with -Wall complains about unused variable
+                        // and inexistence of return value in
+                        // a non-void function
 }
 
 void Broker::receive_message(std::string &message,
@@ -49,15 +51,15 @@ void Broker::deserialize(std::string const &data) {
     this->accounts.clear();
     this->bets.clear();
 
-    for (json jo : j["accounts"]) {
+    for (json o : j["accounts"]) {
         Broker::Account acc;
-        acc.deserialize(jo.dump());
+        acc.deserialize(o.dump());
         this->accounts.push_back(acc);
     }
 
-    for (json jo : j["bets"]) {
+    for (json o : j["bets"]) {
         Broker::Bet bet;
-        bet.deserialize(jo.dump());
+        bet.deserialize(o.dump());
         this->bets.push_back(bet);
     }
 }
