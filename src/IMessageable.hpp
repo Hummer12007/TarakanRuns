@@ -10,7 +10,7 @@ class IMessageable {
 
   public:
     virtual ~IMessageable(void) = 0;
-    virtual void receive_message(std::string &message,
+    virtual void receive_message(std::string const &message,
                                  IMessageable::Callback &fun) = 0;
 };
 
