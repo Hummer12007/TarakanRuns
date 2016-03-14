@@ -8,19 +8,20 @@
 #include "ISerializable.hpp"
 
 class Broker : public ISerializable<Broker>, IMessageable {
-public:
-	Broker(IMessageable &master);
+  public:
+    Broker(IMessageable &master);
     IMessageable master;
     class Broker::Account : public ISerializable<Broker::Account> {
-	std::string serialize(void);
-	void deserialize(std::string const &data);
-	~ISerializable();
-    public:
+        std::string serialize(void);
+        void deserialize(std::string const &data);
+        ~ISerializable();
+
+      public:
         std::string id;
         double balance;
     };
     class Broker::Bet : public ISerializable<Broker::Bet> {
-    public:
+      public:
         std::string client_id;
         std::string race_id;
         std::string racer_id;
@@ -31,4 +32,4 @@ public:
     std::map<std::string, IMessageable> client_handles;
 };
 
-#endif //BROKER_HPP
+#endif // BROKER_HPP

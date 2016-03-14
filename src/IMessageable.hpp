@@ -5,7 +5,7 @@
 #include <functional>
 
 class IMessageable {
-public:
+  public:
     virtual ~IMessageable(void) = 0;
     virtual void receive_message(std::string, std::function<void(string)>) = 0;
 };
