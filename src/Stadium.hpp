@@ -6,9 +6,9 @@
 
 #include "ISerializable.hpp"
 
-class Stadium : public ISerializable<Stadium> {
+class Stadium : public ISerializable {
   public:
-    class Track : public ISerializable<Stadium::Track> {
+    class Track : public ISerializable {
       public:
         ~Track(void);
         std::string serialize(void);

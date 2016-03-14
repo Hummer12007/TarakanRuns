@@ -8,9 +8,9 @@
 #include "ISerializable.hpp"
 #include "IMessageable.hpp"
 
-class Broker : public ISerializable<Broker>, IMessageable {
+class Broker : public ISerializable, IMessageable {
   public:
-    class Account : public ISerializable<Broker::Account> {
+    class Account : public ISerializable {
       public:
         std::string serialize(void);
         void deserialize(std::string const &data);
@@ -20,7 +20,7 @@ class Broker : public ISerializable<Broker>, IMessageable {
         double balance;
     };
 
-    class Bet : public ISerializable<Broker::Bet> {
+    class Bet : public ISerializable {
       public:
         std::string serialize(void);
         void deserialize(std::string const &data);

@@ -3,7 +3,6 @@
 
 #include <string>
 
-template <typename T>
 class ISerializable {
   public:
     virtual ~ISerializable(void) = 0;
@@ -12,7 +11,6 @@ class ISerializable {
 };
 
 // Even pure virtual destructor should have an implementation
-template <typename T>
-inline ISerializable<T>::~ISerializable(void) {}
+inline ISerializable::~ISerializable(void) {}
 
 #endif // ISERIALIZABLE_HPP

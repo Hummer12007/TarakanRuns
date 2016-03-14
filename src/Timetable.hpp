@@ -6,9 +6,9 @@
 
 #include "ISerializable.hpp"
 
-class Timetable : public ISerializable<Timetable> {
+class Timetable : public ISerializable {
   public:
-    class Entry : public ISerializable<Timetable::Entry> {
+    class Entry : public ISerializable {
       public:
         ~Entry(void);
         std::string serialize(void);
