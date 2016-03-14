@@ -1,45 +1,45 @@
-#include "Broker.cpp"
+#include <string>
+#include <vector>
+
 #include "json.hpp"
+#include "Broker.hpp"
 
 using json = nlohmann::json;
 
-Broker::Broker(IMessageable &master) { this->master = master; }
-
-std::string Broker::process_message(message) {
-    // TODO: HREN
+Broker::Broker(IMessageable &master) {
+    this->master = std::shared_ptr<IMessageable>(&master);
 }
 
-void Broker::receive_message(std::string message,
-                             std::function<void(string)> &fun) {
+std::string Broker::process_message(std::string &message) {
+    // TODO: HREN
+    message.empty();    // Just do something
+    return "HREN";      // Without these lines compiler complains
+}
+
+void Broker::receive_message(std::string &message,
+                             std::function<void(std::string)> &fun) {
     fun(this->process_message(message));
 }
 
+// Broker: destructor
+
+Broker::~Broker(void) {}
+
+// Broker: ISerializable methods
+
 std::string Broker::serialize(void) {
     json j;
+
     j["accounts"] = json::array();
     for (Broker::Account acc : this->accounts) {
         j["accounts"].push_back(json::parse(acc.serialize()));
     }
+
     j["bets"] = json::array();
     for (Broker::Bet bet : this->bets) {
         j["bets"].push_back(json::parse(bet.serialize()));
     }
-    return j.dump();
-}
 
-std::string Broker::Account::serialize(void) {
-    json j;
-    j["id"] = this->id;
-    j["balance"] = this->balance;
-    return j.dump();
-}
-
-std::string Broker::Bet::serialize(void) {
-    json j;
-    j["client"] = this->client_id;
-    j["race"] = this->race_id;
-    j["racer"] = this->racer_id;
-    j["amount"] = this->amount;
     return j.dump();
 }
 
@@ -54,6 +54,7 @@ void Broker::deserialize(std::string const &data) {
         acc.deserialize(jo.dump());
         this->accounts.push_back(acc);
     }
+
     for (json jo : j["bets"]) {
         Broker::Bet bet;
         bet.deserialize(jo.dump());
@@ -61,18 +62,50 @@ void Broker::deserialize(std::string const &data) {
     }
 }
 
-void Broker::Account::deserialize(std::string const &data) {
-    json jo = json::parse("data");
+// Broker::Account: destructor
 
-    this->id = jo["id"];
-    this->balance = jo["balance"];
+Broker::Account::~Account(void) {}
+
+// Broker::Account: ISerializable methods
+
+std::string Broker::Account::serialize(void) {
+    json j;
+
+    j["name"] = this->name;
+    j["balance"] = this->balance;
+
+    return j.dump();
 }
 
 void Broker::Account::deserialize(std::string const &data) {
-    json jo = json::parse("data");
+    json j = json::parse(data);
 
-    this->client_id = jo["client"];
-    this->race_id = jo["race"];
-    this->racer_id = jo["racer"];
-    this->amount = jo["amount"];
+    this->name = j["name"];
+    this->balance = j["balance"];
+}
+
+// Broker::Bet: destructor
+
+Broker::Bet::~Bet(void) {}
+
+// Broker::Bet: ISerializable methods
+
+std::string Broker::Bet::serialize(void) {
+    json j;
+
+    j["client_name"] = this->client_name;
+    j["race_id"] = this->race_id;
+    j["racer_name"] = this->racer_name;
+    j["amount"] = this->amount;
+
+    return j.dump();
+}
+
+void Broker::Bet::deserialize(std::string const &data) {
+    json j = json::parse(data);
+
+    this->client_name = j["client_name"];
+    this->race_id = j["race_id"];
+    this->racer_name = j["racer_name"];
+    this->amount = j["amount"];
 }

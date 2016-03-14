@@ -1,35 +1,51 @@
 #ifndef BROKER_HPP
 #define BROKER_HPP
-#include <vector>
+
 #include <string>
+#include <vector>
 #include <map>
 
-#include "IMessageable.hpp"
 #include "ISerializable.hpp"
+#include "IMessageable.hpp"
 
 class Broker : public ISerializable<Broker>, IMessageable {
   public:
-    Broker(IMessageable &master);
-    IMessageable master;
-    class Broker::Account : public ISerializable<Broker::Account> {
+    class Account : public ISerializable<Broker::Account> {
+      public:
         std::string serialize(void);
         void deserialize(std::string const &data);
-        ~ISerializable();
+        ~Account(void);
 
-      public:
-        std::string id;
+        std::string name;
         double balance;
     };
-    class Broker::Bet : public ISerializable<Broker::Bet> {
+
+    class Bet : public ISerializable<Broker::Bet> {
       public:
-        std::string client_id;
-        std::string race_id;
-        std::string racer_id;
+        std::string serialize(void);
+        void deserialize(std::string const &data);
+        ~Bet(void);
+
+        std::string client_name;
+        unsigned int race_id;
+        std::string racer_name;
         double amount;
     };
+
+    Broker(IMessageable &master);
+    std::string process_message(std::string &message);
+
+    std::string serialize(void);
+    void deserialize(std::string const &data);
+    ~Broker(void);
+
+    void receive_message(std::string &message,
+                         std::function<void(std::string)> &fun);
+
+    std::shared_ptr<IMessageable> master;
     std::vector<Broker::Account> accounts;
     std::vector<Broker::Bet> bets;
-    std::map<std::string, IMessageable> client_handles;
+    std::map<std::string, std::shared_ptr<IMessageable>> client_handles;
 };
 
 #endif // BROKER_HPP

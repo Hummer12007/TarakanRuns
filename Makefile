@@ -1,4 +1,4 @@
-OBJECTS=Team.o Stadium.o Timetable.o
+OBJECTS=Team.o Stadium.o Timetable.o Broker.o
 CPPFLAGS=-Ilib
 CXXFLAGS=-std=c++11 -Wall -Wextra
 VPATH=src
