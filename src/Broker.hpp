@@ -33,14 +33,14 @@ class Broker : public ISerializable, IMessageable {
     };
 
     Broker(IMessageable &master);
-    std::string process_message(std::string &message);
+    std::string process_message(std::string const &message);
 
     std::string serialize(void);
     void deserialize(std::string const &data);
     ~Broker(void);
 
-    void receive_message(std::string &message,
-                         std::function<void(std::string)> &fun);
+    void receive_message(std::string const &message,
+                         std::function<void(std::string const &)> &fun);
 
     std::shared_ptr<IMessageable> master;
     std::vector<Broker::Account> accounts;

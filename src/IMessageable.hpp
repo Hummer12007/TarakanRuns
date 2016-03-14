@@ -5,10 +5,13 @@
 #include <functional>
 
 class IMessageable {
+  private:
+    typedef std::function<void(std::string const &)> Callback;
+
   public:
     virtual ~IMessageable(void) = 0;
     virtual void receive_message(std::string &message,
-                                 std::function<void(std::string)> &fun) = 0;
+                                 IMessageable::Callback &fun) = 0;
 };
 
 // Even pure virtual destructor should have an implementation

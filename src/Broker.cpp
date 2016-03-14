@@ -10,7 +10,7 @@ Broker::Broker(IMessageable &master) {
     this->master = std::shared_ptr<IMessageable>(&master);
 }
 
-std::string Broker::process_message(std::string &message) {
+std::string Broker::process_message(std::string const &message) {
     // TODO: HREN
     message.empty();    // Just do something: without these lines compiler
     return "HREN";      // with -Wall complains about unused variable
@@ -18,8 +18,8 @@ std::string Broker::process_message(std::string &message) {
                         // a non-void function
 }
 
-void Broker::receive_message(std::string &message,
-                             std::function<void(std::string)> &fun) {
+void Broker::receive_message(std::string const &message,
+                             std::function<void(std::string const &)> &fun) {
     fun(this->process_message(message));
 }
 
