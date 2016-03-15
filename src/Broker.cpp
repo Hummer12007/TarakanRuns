@@ -12,10 +12,7 @@ Broker::Broker(IMessageable &master) {
 
 std::string Broker::process_message(std::string const &message) {
     // TODO: HREN
-    message.empty();    // Just do something: without these lines compiler
-    return "HREN";      // with -Wall complains about unused variable
-                        // and inexistence of return value in
-                        // a non-void function
+    return "HREN";
 }
 
 void Broker::receive_message(std::string const &message,
