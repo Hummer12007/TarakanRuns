@@ -292,11 +292,15 @@ void rnd_broker(Broker &b) {
     }
 }
 
+inline bool dbl_equal(double a, double b, double epsilon = 0.0000001) {
+    return (a - b) < epsilon;
+}
+
 TEST_CASE("testing broker", "[Broker]") {
     srand(time(NULL));
     SECTION("testing broker serialization") {
-        VoidMessageable vm;
-        Broker b_serialize(vm);
+        std::shared_ptr<VoidMessageable> sp_vm (new VoidMessageable);
+        Broker b_serialize(sp_vm);
         rnd_broker(b_serialize);
         string s = "{\"accounts\":[";
 
@@ -324,7 +328,7 @@ TEST_CASE("testing broker", "[Broker]") {
         REQUIRE(b_serialize.serialize() == s);
 
         SECTION("testing broker deserialization") {
-            Broker b_deserialize(vm);
+            Broker b_deserialize(sp_vm);
 
             b_deserialize.deserialize(s);
 
@@ -339,8 +343,8 @@ TEST_CASE("testing broker", "[Broker]") {
                 for (int i = 0; i < a_num; i++) {
                     REQUIRE(b_deserialize.accounts[i].name ==
                             b_serialize.accounts[i].name);
-                    REQUIRE(b_deserialize.accounts[i].balance ==
-                            b_serialize.accounts[i].balance);
+                    REQUIRE(dbl_equal(b_deserialize.accounts[i].balance,
+                                      b_serialize.accounts[i].balance));
                 }
             }
 
@@ -356,8 +360,8 @@ TEST_CASE("testing broker", "[Broker]") {
                             b_serialize.bets[i].race_id);
                     REQUIRE(b_deserialize.bets[i].racer_name ==
                             b_serialize.bets[i].racer_name);
-                    REQUIRE(b_deserialize.bets[i].amount ==
-                            b_serialize.bets[i].amount);
+                    REQUIRE(dbl_equal(b_deserialize.bets[i].amount,
+                                      b_serialize.bets[i].amount));
                 }
             }
         }

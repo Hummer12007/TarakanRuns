@@ -32,7 +32,7 @@ class Broker : public ISerializable, IMessageable {
         double amount;
     };
 
-    Broker(IMessageable &master);
+    Broker(std::shared_ptr<IMessageable> const &master);
     std::string process_message(std::string const &message);
 
     std::string serialize(void);

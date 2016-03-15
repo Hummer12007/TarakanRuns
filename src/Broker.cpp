@@ -6,8 +6,8 @@
 
 using json = nlohmann::json;
 
-Broker::Broker(IMessageable &master) {
-    this->master = std::shared_ptr<IMessageable>(&master);
+Broker::Broker(std::shared_ptr<IMessageable> const &master) {
+    this->master = master;
 }
 
 std::string Broker::process_message(std::string const &message) {
