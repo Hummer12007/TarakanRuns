@@ -6,7 +6,6 @@
 #include <iomanip>
 #include <sstream>
 #include <limits>
-#include <cmath>
 
 #include "catch.hpp"
 #include "Team.hpp"
@@ -27,7 +26,7 @@ class VoidMessageable : public IMessageable {
     VoidMessageable(void){};
     void receive_message(std::string const &message,
                          std::function<void(std::string const &)> &fun){};
-    ~VoidMessageable(void) {};
+    ~VoidMessageable(void){};
 };
 
 void rnd_string(string &s, int len) {
@@ -54,15 +53,15 @@ void rnd_team(Team &t) {
 }
 
 std::string dbl_to_str(double &d) {
-	std::ostringstream o;
-	if (std::fmod(d,1) == 0) {
-		o << std::fixed << std::setprecision(1);
-	} else {
-		o.unsetf(std::ios_base::floatfield);
-		o << std::setprecision(std::numeric_limits<double>::digits10);
-	}
-	o << d;
-	return o.str();
+    std::ostringstream o;
+    if (std::fmod(d, 1) == 0) {
+        o << std::fixed << std::setprecision(1);
+    } else {
+        o.unsetf(std::ios_base::floatfield);
+        o << std::setprecision(std::numeric_limits<double>::digits10);
+    }
+    o << d;
+    return o.str();
 }
 
 TEST_CASE("testing team", "[Team]") {
@@ -138,14 +137,13 @@ TEST_CASE("testing stadium", "[Stadium]") {
 
         string s = "{\"tracks\":[";
 
-		for (auto &track : st_serialize.tracks) {
+        for (auto &track : st_serialize.tracks) {
             s += "{\"id\":";
             s += std::to_string(track.id) + ",\"lanes\":";
-            s += std::to_string(track.lanes) +
-                 ",\"team_quota\":";
+            s += std::to_string(track.lanes) + ",\"team_quota\":";
             s += std::to_string(track.team_quota) + "}";
-			if (&track != &*std::prev(std::end(st_serialize.tracks)))
-				s += ",";
+            if (&track != &*std::prev(std::end(st_serialize.tracks)))
+                s += ",";
         }
         s += "]}";
 
@@ -203,18 +201,18 @@ TEST_CASE("testing timetable", "[Timetable]") {
         rnd_timetable(tt_serialize);
         string s = "{\"entries\":[";
 
-		for (auto &e : tt_serialize.entries) {
+        for (auto &e : tt_serialize.entries) {
             s += "{\"racers_names\":[";
-			for (auto &racer : e.racers_names) {
+            for (auto &racer : e.racers_names) {
                 s += "\"" + racer + "\"";
-				if (&racer != &*std::prev(std::end(e.racers_names)))
-					s += ",";
+                if (&racer != &*std::prev(std::end(e.racers_names)))
+                    s += ",";
             }
             s += "]";
             s += ",\"timestamp\":" + std::to_string(e.timestamp) +
                  ",\"track_id\":" + std::to_string(e.track_id) + "}";
-			if (&e != &*std::prev(std::end(tt_serialize.entries)))
-				s += ",";
+            if (&e != &*std::prev(std::end(tt_serialize.entries)))
+                s += ",";
         }
 
         s += "]}";
@@ -293,35 +291,31 @@ void rnd_broker(Broker &b) {
     }
 }
 
-inline bool dbl_equal(double a, double b, double epsilon = 0.0000001) {
-    return std::abs(a - b) < epsilon;
-}
-
 TEST_CASE("testing broker", "[Broker]") {
     srand(time(NULL));
     SECTION("testing broker serialization") {
-        std::shared_ptr<VoidMessageable> sp_vm (new VoidMessageable);
+        std::shared_ptr<VoidMessageable> sp_vm(new VoidMessageable);
         Broker b_serialize(sp_vm);
         rnd_broker(b_serialize);
         string s = "{\"accounts\":[";
 
-		for (auto &a : b_serialize.accounts) {
-			s += "{\"balance\":" + dbl_to_str(a.balance);
-			s += ",\"name\":\"" + a.name + "\"}";
+        for (auto &a : b_serialize.accounts) {
+            s += "{\"balance\":" + dbl_to_str(a.balance);
+            s += ",\"name\":\"" + a.name + "\"}";
 
-			if (&a != &*std::prev(std::end(b_serialize.accounts)))
-				s += ",";
+            if (&a != &*std::prev(std::end(b_serialize.accounts)))
+                s += ",";
         }
 
         s += "],\"bets\":[";
 
-		for (auto &b : b_serialize.bets) {
-			s += "{\"amount\":" + dbl_to_str(b.amount);
+        for (auto &b : b_serialize.bets) {
+            s += "{\"amount\":" + dbl_to_str(b.amount);
             s += ",\"client_name\":\"" + b.client_name + "\"";
             s += ",\"race_id\":" + std::to_string(b.race_id);
             s += ",\"racer_name\":\"" + b.racer_name + "\"}";
-			if (&b != &*std::prev(std::end(b_serialize.bets)))
-				s += ",";
+            if (&b != &*std::prev(std::end(b_serialize.bets)))
+                s += ",";
         }
 
         s += "]}";
@@ -344,8 +338,8 @@ TEST_CASE("testing broker", "[Broker]") {
                 for (int i = 0; i < a_num; i++) {
                     REQUIRE(b_deserialize.accounts[i].name ==
                             b_serialize.accounts[i].name);
-                    REQUIRE(dbl_equal(b_deserialize.accounts[i].balance,
-                                      b_serialize.accounts[i].balance));
+                    REQUIRE(b_deserialize.accounts[i].balance ==
+                            Approx(b_serialize.accounts[i].balance));
                 }
             }
 
@@ -361,11 +355,10 @@ TEST_CASE("testing broker", "[Broker]") {
                             b_serialize.bets[i].race_id);
                     REQUIRE(b_deserialize.bets[i].racer_name ==
                             b_serialize.bets[i].racer_name);
-                    REQUIRE(dbl_equal(b_deserialize.bets[i].amount,
-                                      b_serialize.bets[i].amount));
+                    REQUIRE(b_deserialize.bets[i].amount ==
+                            Approx(b_serialize.bets[i].amount));
                 }
             }
         }
     }
 }
-
