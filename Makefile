@@ -9,10 +9,12 @@ main: $(OBJECTS)
 
 Test: $(OBJECTS)
 
+UnitTest: $(OBJECTS)
+
 clean: clean_objects clean_symbols
 
 clean_objects:
-	find . -type f -name '*.o' -exec rm {} +
+	find . -type f -name '*.o' -exec rm -rf {} +
 
 clean_symbols:
-	find . -type f -name '*.dSYM' -exec rm {} +
+	find . -type f -name '*.dSYM' -exec rm -rf {} +
