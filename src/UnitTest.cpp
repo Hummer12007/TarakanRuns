@@ -258,9 +258,9 @@ TEST_CASE("testing timetable", "[Timetable]") {
 }
 
 void rnd_double(double &d) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(1, 2);
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    static std::uniform_real_distribution<> dis(1, 2);
     d = dis(gen);
 }
 
