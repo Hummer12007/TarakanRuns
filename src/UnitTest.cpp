@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <sstream>
 #include <limits>
+#include <cmath>
 
 #include "catch.hpp"
 #include "Team.hpp"
@@ -293,7 +294,7 @@ void rnd_broker(Broker &b) {
 }
 
 inline bool dbl_equal(double a, double b, double epsilon = 0.0000001) {
-    return (a - b) < epsilon;
+    return std::abs(a - b) < epsilon;
 }
 
 TEST_CASE("testing broker", "[Broker]") {
