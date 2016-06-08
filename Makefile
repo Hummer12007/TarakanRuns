@@ -1,20 +1,37 @@
-OBJECTS=Team.o Stadium.o Timetable.o Broker.o
-CPPFLAGS=-Ilib
-CXXFLAGS=-std=c++11 -Wall -Wextra
-VPATH=src
+OBJECTS=stringutils.o logging.o MultiCallHandler.o \
+        Client.o Server.o ClientSocket.o \
+        RandomStrategy.o Tarakan.o Team.o Timetable.o Race.o \
+            RaceResult.o Stadium.o Management.o \
+        multi_call_main.o
+CXXFLAGS=-std=c++11 -g -Wall -Wextra \
+          -Isrc -Isrc/include
+LDFLAGS=-Llib
+LDLIBS=-lnetlink -pthread
+VPATH=src/util:src/network:src/trk
 
-all: main
 
-main: $(OBJECTS)
+all: tarakans team management
 
-Test: $(OBJECTS)
+tarakans: lib/libnetlink.a $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
-UnitTest: $(OBJECTS)
+lib/libnetlink.a:
+	$(MAKE) -C lib
 
-clean: clean_objects clean_symbols
+team: tarakans
+	ln -s tarakans team
 
-clean_objects:
-	find . -type f -name '*.o' -exec rm -rf {} +
+management: tarakans
+	ln -s tarakans management
 
-clean_symbols:
-	find . -type f -name '*.dSYM' -exec rm -rf {} +
+
+clean: clean-obj clean-exec clean-symlinks
+
+clean-obj:
+	find . -maxdepth 1 -type f -name '*.o' -exec rm -r {} +
+
+clean-exec:
+	find . -maxdepth 1 -type f -executable -exec rm -r {} +
+
+clean-symlinks:
+	find . -maxdepth 1 -type l -exec rm -r {} +
