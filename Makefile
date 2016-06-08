@@ -10,12 +10,13 @@ LDLIBS=-lnetlink -pthread
 VPATH=src/util:src/network:src/trk
 
 
-all: tarakans team management
+all: tarakans team management docs
+
 
 tarakans: lib/libnetlink.a $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
-lib/libnetlink.a:
+lib/libnetlink.a: lib/Makefile
 	$(MAKE) -C lib
 
 team: tarakans
@@ -23,6 +24,11 @@ team: tarakans
 
 management: tarakans
 	ln -s tarakans management
+
+
+.PHONY: docs
+docs: docs/Makefile
+	$(MAKE) -C docs
 
 
 clean: clean-obj clean-exec clean-symlinks
