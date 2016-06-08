@@ -4,7 +4,7 @@
 #include "Timetable.hpp"
 
 #include "util/logging.hpp"
-#include "network/Server.cpp"
+#include "network/Server.hpp"
 #include "network/ClientSocket.hpp"
 #include "util/stringutils.hpp"
 

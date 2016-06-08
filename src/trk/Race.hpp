@@ -1,7 +1,7 @@
 #ifndef RACE_HPP
 #define RACE_HPP
 
-#include "RaceResult.cpp"
+#include "RaceResult.hpp"
 #include "RandomStrategy.hpp"
 
 #include <map>
