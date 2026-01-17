@@ -1,0 +1,25 @@
+# Build artifacts
+*.o
+*.a
+tarakans
+team
+management
+
+# Library build artifacts
+lib/*.o
+lib/*.a
+
+# Documentation generated files
+docs/html/
+docs/latex/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
